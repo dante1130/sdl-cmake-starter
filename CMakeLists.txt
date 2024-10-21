@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.25.1)
 
 project(sdl-project-starter C)
 
+add_subdirectory(cmake)
+
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_custom_target(

@@ -1,0 +1,12 @@
+include(get_cpm.cmake)
+
+CPMAddPackage(
+    NAME SDL
+    GITHUB_REPOSITORY libsdl-org/SDL
+    GIT_TAG preview-3.1.3 
+    VERSION 3.1.3
+    OPTIONS "SDL_SHARED OFF" "SDL_STATIC ON" "SDL_TEST_LIBRARY OFF" "SDL_TESTS OFF" "SDL_INSTALL_TESTS OFF"
+    EXCLUDE_FROM_ALL
+    SYSTEM
+)
+
