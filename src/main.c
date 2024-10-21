@@ -25,7 +25,7 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[]) {
 
     *appstate = calloc(1, sizeof(struct Luminol_AppState));
 
-    if (!*appstate) {
+    if (*appstate == nullptr) {
         SDL_Log("Couldn't allocate memory for appstate: %s", SDL_GetError());
         return SDL_APP_FAILURE;
     }
