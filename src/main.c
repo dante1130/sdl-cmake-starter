@@ -30,12 +30,15 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[]) {
         return SDL_APP_FAILURE;
     }
 
+    constexpr auto window_width = 640;
+    constexpr auto window_height = 480;
+
     const auto luminol_appstate = (struct Luminol_AppState*)*appstate;
 
     if (!SDL_CreateWindowAndRenderer(
             "Luminol_SDL",
-            640,
-            480,
+            window_width,
+            window_height,
             0,
             &luminol_appstate->window,
             &luminol_appstate->renderer
@@ -58,14 +61,15 @@ SDL_AppResult SDL_AppEvent(void* appstate, SDL_Event* event) {
 }
 
 SDL_AppResult SDL_AppIterate(void* appstate) {
-    const auto elapsed_time_ms = SDL_GetTicks() / 1000.f;
-    const auto red = (uint8_t)(sin(elapsed_time_ms) * 127 + 128);
-    const auto green = (uint8_t)(sin(elapsed_time_ms + 2) * 127 + 128);
-    const auto blue = (uint8_t)(sin(elapsed_time_ms + 4) * 127 + 128);
+    const auto elapsed_time_ms = (double)SDL_GetTicks() / 1000.0;
+    const auto red = (uint8_t)((sin(elapsed_time_ms) * 127) + 128);
+    const auto green = (uint8_t)((sin(elapsed_time_ms + 2) * 127) + 128);
+    const auto blue = (uint8_t)((sin(elapsed_time_ms + 4) * 127) + 128);
+    constexpr auto alpha = (uint8_t){255};
 
     const auto luminol_appstate = (const struct Luminol_AppState*)appstate;
 
-    SDL_SetRenderDrawColor(luminol_appstate->renderer, red, green, blue, 255);
+    SDL_SetRenderDrawColor(luminol_appstate->renderer, red, green, blue, alpha);
     SDL_RenderClear(luminol_appstate->renderer);
     SDL_RenderPresent(luminol_appstate->renderer);
 
