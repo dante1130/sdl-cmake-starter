@@ -1,3 +1,4 @@
+#include "SDL3/SDL_pixels.h"
 #define SDL_MAIN_USE_CALLBACKS 1 /* use the callbacks instead of main() */
 
 #include <math.h>
@@ -65,11 +66,12 @@ SDL_AppResult SDL_AppIterate(void* appstate) {
     const auto red = (uint8_t)((sin(elapsed_time_ms) * 127) + 128);
     const auto green = (uint8_t)((sin(elapsed_time_ms + 2) * 127) + 128);
     const auto blue = (uint8_t)((sin(elapsed_time_ms + 4) * 127) + 128);
-    constexpr auto alpha = (uint8_t){255};
 
     const auto luminol_appstate = (const struct Luminol_AppState*)appstate;
 
-    SDL_SetRenderDrawColor(luminol_appstate->renderer, red, green, blue, alpha);
+    SDL_SetRenderDrawColor(
+        luminol_appstate->renderer, red, green, blue, SDL_ALPHA_OPAQUE
+    );
     SDL_RenderClear(luminol_appstate->renderer);
     SDL_RenderPresent(luminol_appstate->renderer);
 
