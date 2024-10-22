@@ -58,8 +58,6 @@ SDL_AppResult SDL_AppEvent(void* appstate, SDL_Event* event) {
 }
 
 SDL_AppResult SDL_AppIterate(void* appstate) {
-    UNUSED(appstate);
-
     const auto elapsed_time_ms = SDL_GetTicks() / 1000.f;
     const auto red = (uint8_t)(sin(elapsed_time_ms) * 127 + 128);
     const auto green = (uint8_t)(sin(elapsed_time_ms + 2) * 127 + 128);
